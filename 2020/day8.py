@@ -5,7 +5,7 @@ Part 1 -
     Given some assembly instructions that have an infinite loop, find the value of the accumulator before the infinite loop starts
 
 Part 2 -
-    Fix the infinite loop be replacing 1 jmp instruction by an nop instruction or vice versa and return the value of the accumulator
+    Fix the infinite loop by replacing 1 jmp instruction with an nop instruction or vice versa and return the value of the accumulator
 """
 
 #Set up the input
