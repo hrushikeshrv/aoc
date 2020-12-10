@@ -70,3 +70,20 @@ def solve_1(bag_contents):
 ans_1 = solve_1(bag_contents)
 print(ans_1)
 #Answer was 103
+
+#Solution to part 2
+def solve_2(bag_contents, start_bag, counted_bags):
+    count_sum = []
+    for bag in bag_contents[start_bag]:
+        if bag[1] == 'other':
+            return 0
+        
+        count_sum.append(int(bag[0]))
+        count_sum.append(int(bag[0])*solve_2(bag_contents, bag[1], counted_bags))
+    counted_bags += sum(count_sum)
+
+    return counted_bags
+
+ans_2 = solve_2(bag_contents, 'shiny gold', 0)
+print(ans_2)
+#Answer was 1469
