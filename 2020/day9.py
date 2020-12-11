@@ -1,5 +1,5 @@
 """
-Problem 9 - https://adventofcode.com/2020/day/8
+Problem 9 - https://adventofcode.com/2020/day/9
 
 Part 1 -
     Given a list of numbers in which the next number has to be the sum of any 2 numbers from the previous 25 numbers, find the first number that violates this rule
