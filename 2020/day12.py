@@ -8,13 +8,14 @@ Part 2 -
     Given a waypoint and instructions to move towards the waypoint, return the coordinates you reach
 """
 
-#Set up the input
+# Set up the input
 with open('input-12122020.txt', 'r') as file:
     d = file.readlines()
 
 directions = [(x[0], int(x[1:-1])) for x in d]
 
-#Solution to part 1
+
+# Solution to part 1
 def solve_1(directions):
     facing = 'E'
     pos = [0, 0]
@@ -27,7 +28,7 @@ def solve_1(directions):
             pos[0] += d[1]
         elif d[0] == 'W':
             pos[0] -= d[1]
-            
+        
         elif d[0] == 'F':
             if facing == 'E':
                 pos[0] += d[1]
@@ -97,16 +98,19 @@ def solve_1(directions):
     
     return abs(pos[0]) + abs(pos[1])
 
+
 ans_1 = solve_1(directions)
 print(ans_1)
-#Answer was 1482
 
-#Solution to part 2
+
+# Answer was 1482
+
+# Solution to part 2
 def solve_2(directions):
-    #pos is now the position of the waypoint relative to the boat
+    # pos is now the position of the waypoint relative to the boat
     pos = [10, 1]
     boat = [0, 0]
-
+    
     for d in directions:
         if d[0] == 'N':
             pos[1] += d[1]
@@ -116,29 +120,30 @@ def solve_2(directions):
             pos[0] += d[1]
         elif d[0] == 'W':
             pos[0] -= d[1]
-            
+        
         elif d[0] == 'F':
-            boat[0] += d[1]*pos[0]
-            boat[1] += d[1]*pos[1]
+            boat[0] += d[1] * pos[0]
+            boat[1] += d[1] * pos[1]
         
         elif d[0] == 'L':
             if d[1] == 90:
-                pos[0], pos[1] = -1*pos[1], pos[0]
+                pos[0], pos[1] = -1 * pos[1], pos[0]
             elif d[1] == 180:
-                pos[0], pos[1] = -1*pos[0], -1*pos[1]
+                pos[0], pos[1] = -1 * pos[0], -1 * pos[1]
             elif d[1] == 270:
-                pos[0], pos[1] = pos[1], -1*pos[0]
+                pos[0], pos[1] = pos[1], -1 * pos[0]
         
         elif d[0] == 'R':
             if d[1] == 270:
-                pos[0], pos[1] = -1*pos[1], pos[0]
+                pos[0], pos[1] = -1 * pos[1], pos[0]
             elif d[1] == 180:
-                pos[0], pos[1] = -1*pos[0], -1*pos[1]
+                pos[0], pos[1] = -1 * pos[0], -1 * pos[1]
             elif d[1] == 90:
-                pos[0], pos[1] = pos[1], -1*pos[0]
-        
+                pos[0], pos[1] = pos[1], -1 * pos[0]
+    
     return abs(boat[0]) + abs(boat[1])
+
 
 ans_2 = solve_2(directions)
 print(ans_2)
-#Answer was 48739
+# Answer was 48739

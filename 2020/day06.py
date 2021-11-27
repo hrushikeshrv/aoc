@@ -9,11 +9,12 @@ Part 2 -
 """
 from collections import Counter
 
-#Set up the input 
+# Set up the input
 with open('input-06122020.txt', 'r') as file:
     yesses = file.readlines()
 
-#Define helper functions
+
+# Define helper functions
 def get_answers_1(y):
     cache = ''
     answers = []
@@ -23,9 +24,10 @@ def get_answers_1(y):
             cache = ''
         else:
             cache += line.replace('\n', '')
-    #Append the last cache not counted in the for loop
+    # Append the last cache not counted in the for loop
     answers.append(cache)
     return answers
+
 
 def get_answers_2(y):
     cache = ''
@@ -42,7 +44,8 @@ def get_answers_2(y):
     answers.append((cache, n))
     return answers
 
-#Solution to part 1
+
+# Solution to part 1
 def solve_1():
     answers = get_answers_1(yesses)
     yes = 0
@@ -50,11 +53,14 @@ def solve_1():
         yes += len(set(answer))
     return yes
 
+
 ans_1 = solve_1()
 print(ans_1)
-#Answer was 6310
 
-#Solution to part 2
+
+# Answer was 6310
+
+# Solution to part 2
 def solve_2():
     answers = get_answers_2(yesses)
     yes = 0
@@ -65,6 +71,7 @@ def solve_2():
                 yes += 1
     return yes
 
+
 ans_2 = solve_2()
 print(ans_2)
-#Answer was 3193
+# Answer was 3193

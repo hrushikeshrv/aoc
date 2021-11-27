@@ -8,11 +8,12 @@ Part 2 -
     Given the same lists, start with the shiny golden bag and return the total number of bags inside the shiny golden bag
 """
 
-#Set up the input
+# Set up the input
 with open('input-07122020.txt', 'r') as file:
     rules = file.readlines()
 
-#Define helper functions
+
+# Define helper functions
 def get_contents(rules):
     """
     From the list of rules about which bag contains which bag(s), returns a dictionary with a bag color as the key and a list of bags it contains as the value --
@@ -44,22 +45,25 @@ def get_contents(rules):
             contents[rule1] = l[-1]
     return contents
 
+
 bag_contents = get_contents(rules)
+
 
 def bag_contains_target(bag_contents, bag, target):
     """
     Takes in the contents dictionary constructed in the last step, the bag (bag) to start from and the bag to search for (target) and searches for target starting from bag. Similar to DFS
     """
-    #If the bag contains no other bags, return False
+    # If the bag contains no other bags, return False
     if bag == 'other' or bag_contents[bag][0][1] == 'other':
         return False
     elif any(b[1] == target for b in bag_contents[bag]):
         return True
-    #Otherwise, the bag is not empty and doesn't contain the target bag immediately, go one level deeper
+    # Otherwise, the bag is not empty and doesn't contain the target bag immediately, go one level deeper
     else:
         return any(bag_contains_target(bag_contents, b[1], target) for b in bag_contents[bag])
 
-#Solution to part 1
+
+# Solution to part 1
 def solve_1(bag_contents):
     n = 0
     for bag in bag_contents.keys():
@@ -67,11 +71,14 @@ def solve_1(bag_contents):
             n += 1
     return n
 
+
 ans_1 = solve_1(bag_contents)
 print(ans_1)
-#Answer was 103
 
-#Solution to part 2
+
+# Answer was 103
+
+# Solution to part 2
 def solve_2(bag_contents, start_bag, counted_bags):
     count_sum = []
     for bag in bag_contents[start_bag]:
@@ -79,11 +86,12 @@ def solve_2(bag_contents, start_bag, counted_bags):
             return 0
         
         count_sum.append(int(bag[0]))
-        count_sum.append(int(bag[0])*solve_2(bag_contents, bag[1], counted_bags))
+        count_sum.append(int(bag[0]) * solve_2(bag_contents, bag[1], counted_bags))
     counted_bags += sum(count_sum)
-
+    
     return counted_bags
+
 
 ans_2 = solve_2(bag_contents, 'shiny gold', 0)
 print(ans_2)
-#Answer was 1469
+# Answer was 1469
