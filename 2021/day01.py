@@ -1,3 +1,13 @@
+"""
+Problem 1 - https://adventofcode.com/2021/day/1
+
+Part 1 -
+    Given a list of numbers, count how many numbers are greater than the number that comes before them
+    
+Part 2 -
+    Take a 3 day sliding sum window of the previous input and solve part 1 on it
+"""
+
 # Set up the input
 with open('input-01.txt.', 'r') as file:
     lines = list(map(lambda x: int(x), file.readlines()))
@@ -5,11 +15,6 @@ with open('input-01.txt.', 'r') as file:
 
 # Solution to part 1
 def solve_1(measurements):
-    """
-    
-    :param measurements: List:int
-    :return: int
-    """
     increases = 0
     for i in range(1, len(measurements)):
         if measurements[i] > measurements[i-1]:
