@@ -1,5 +1,12 @@
 """
 Problem 4 - https://adventofcode.com/2021/day/4
+
+Part 1 -
+    Given a list of bingo boards and the order in which numbers are drawn, find the board that will win first
+    and return a score
+
+Part 2 -
+    Find the last board that will win and return its score
 """
 
 # Set up the input
@@ -21,7 +28,7 @@ def has_bingo(board):
     """
     Checks if a board has won by checking if all of a particular row or column has None values.
     :param board: List[List[str]]
-    :return:
+    :return: bool
     """
     # Assume the dimension of the board to be 5x5 (given)
     for row in board:
@@ -40,7 +47,7 @@ def update_boards(number):
     """
     Updates all boards and replaces the drawn number with None
     :param number: int
-    :return:
+    :return: None
     """
     number = int(number)
     for board in boards:
@@ -55,8 +62,8 @@ def update_boards(number):
 def get_board_score(board):
     """
     Calculates the score of the winning board as per the rules of the problem
-    :param board:
-    :return:
+    :param board: List[List[str]]
+    :return: int
     """
     score = 0
     for row in board:
