@@ -13,9 +13,6 @@ Part 2 -
 with open('input-06.txt', 'r') as file:
     ages = list(map(lambda x: int(x), file.readline().split(',')))
 
-with open('input-06-test.txt', 'r') as file:
-    test_ages = list(map(lambda x: int(x), file.readline().split(',')))
-
 
 # Define helper functions
 def update_ages(ages_list):

@@ -14,9 +14,6 @@ Part 2 -
 with open('input-03.txt', 'r') as file:
     lines = file.readlines()
 
-with open('input-03-test.txt', 'r') as file:
-    test_lines = file.readlines()
-
 
 # Solution to part 1
 def solve_1(readings):

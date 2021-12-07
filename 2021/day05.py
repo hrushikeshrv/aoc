@@ -14,9 +14,6 @@ Part 2 -
 with open('input-05.txt', 'r') as file:
     vents = file.readlines()
 
-with open('input-05-test.txt', 'r') as file:
-    test_vents = file.readlines()
-
 
 # Solution to part 1
 def solve_1(vent_map, dimension):
@@ -52,7 +49,7 @@ def solve_1(vent_map, dimension):
     return dangerous_vents, ocean_floor
 
 
-ans, _ = solve_1(test_vents, 10)
+ans, _ = solve_1(vents, 10)
 print(ans)
 # Answer was 7414
 

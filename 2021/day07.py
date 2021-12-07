@@ -14,9 +14,6 @@ Part 2 -
 with open('input-07.txt', 'r') as file:
     pos = sorted(list(map(lambda x: int(x), file.readline().split(','))))
 
-with open('input-07-test.txt', 'r') as file:
-    test_pos = sorted(list(map(lambda x: int(x), file.readline().split(','))))
-
 
 # Solution to part 1
 def solve_1(positions):
