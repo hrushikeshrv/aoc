@@ -1,5 +1,5 @@
 """
-Problem 7 - https://adventofcode.com/2021/day/6
+Problem 7 - https://adventofcode.com/2021/day/7
 
 Part 1 -
     Given a list of numbers L, find a number m such that the sum of absolute differences between m and L[i]
