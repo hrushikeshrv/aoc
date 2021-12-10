@@ -83,83 +83,45 @@ def get_low_points(vent_map):
     return low_points
 
 
-def expand_basin(vent_map, starting_point, max_x, max_y, ignore_points):
-    basin_set = set()
+def fill_basin(vent_map, starting_point, max_x, max_y, visited_points):
+    # print(f'Starting from low point {starting_point} - {vent_map[starting_point[1]][starting_point[0]]}')
+    visited_points.add(starting_point)
     new_points = set()
-    ignore_points.add(starting_point)
-    # Expand in the +x direction
-    current_x = starting_point[0]
-    while current_x < max_x:      # TODO may throw index error
-        if int(vent_map[starting_point[1]][current_x+1]) == 9:
-            break
-        current_x += 1
-        if current_x == max_x or int(vent_map[starting_point[1]][current_x]) <= int(vent_map[starting_point[1]][current_x+1]):
-            # basin_size += 1
-            basin_set.add((current_x, starting_point[1]))
-            new_points.add((current_x, starting_point[1]))
-        else:
-            break
-    # Expand in the -x direction
-    current_x = starting_point[0]
-    while current_x > 0:
-        if int(vent_map[starting_point[1]][current_x-1]) == 9:
-            break
-        current_x -= 1
-        if current_x == 0 or int(vent_map[starting_point[1]][current_x]) <= int(vent_map[starting_point[1]][current_x-1]):
-            # basin_size += 1
-            basin_set.add((current_x, starting_point[1]))
-            new_points.add((current_x, starting_point[1]))
-        else:
-            break
-    
-    # Expand in the +y direction
-    current_y = starting_point[1]
-    while current_y < max_y:
-        if int(vent_map[current_y+1][starting_point[0]]) == 9:
-            break
-        current_y += 1
-        if current_y == max_y or int(vent_map[current_y][starting_point[0]]) <= int(vent_map[current_y+1][starting_point[0]]):
-            # basin_size += 1
-            basin_set.add((starting_point[0], current_y))
-            new_points.add((starting_point[0], current_y))
-        else:
-            break
-    
-    # Expand in the -y direction
-    current_y = starting_point[1]
-    while current_y > 0:
-        if int(vent_map[current_y-1][starting_point[0]]) == 9:
-            break
-        current_y -= 1
-        if current_y == 0 or int(vent_map[current_y][starting_point[0]]) <= int(vent_map[current_y-1][starting_point[0]]):
-            # basin_size += 1
-            basin_set.add((starting_point[0], current_y))
-            new_points.add((starting_point[0], current_y))
-        else:
-            break
-    
-    # print(f'Considering low point {vent_map[starting_point[1]][starting_point[0]]}.')
-    # print(f'Found new points {new_points}')
-    new_points = new_points.difference(ignore_points)
-    # print(f'Ignoring {ignore_points}')
-    
-    # print(f'New points are now {new_points}')
-    # raise ValueError
+    basin_points = {(starting_point[0], starting_point[1])}
+    neighbours = get_new_neighbours(starting_point[0], starting_point[1], max_x, max_y, visited_points)
+    for n in neighbours:
+        # If this neighbour is also a low point, add it to new_points
+        second_neighbours = get_new_neighbours(n[0], n[1], max_x, max_y, visited_points)
+        smallest = True
+        number = int(vent_map[n[1]][n[0]])
+        # print(f'Considering point {n} - {number}')
+        for n2 in second_neighbours:
+            # print(f'Found neighbour {n2} - {vent_map[n2[1]][n2[0]]}')
+            if int(vent_map[n2[1]][n2[0]]) <= number:
+                smallest = False
+        if smallest and len(second_neighbours) > 0:
+            # print(f'{number} is in the basin because it is smaller than its neighbours {second_neighbours}')
+            new_points.add(n)
+            basin_points.add(n)
+    new_points = new_points.difference(visited_points)
     for new_point in new_points:
-        basin_set.update(expand_basin(vent_map, new_point, max_x, max_y, ignore_points))
-    return basin_set
+        basin_points.update(fill_basin(vent_map, new_point, max_x, max_y, visited_points))
+    return basin_points
 
 
 def solve_2(vent_map):
     low_points = get_low_points(vent_map)
+    # print(f'Found low points {low_points}')
     max_x = len(vent_map[0]) - 1
     max_y = len(vent_map) - 1
     basin_sizes = []
     for point in low_points:
-        basin_sizes.append(len(expand_basin(vent_map, point, max_x, max_y, set())))
+        basin = fill_basin(vent_map, point, max_x, max_y, set())
+        # print(f'Found basin {basin}')
+        basin_sizes.append(len(basin))
     basin_sizes.sort()
-    # return basin_sizes[-3] * basin_sizes[-2] * basin_sizes[-1]
-    return basin_sizes[-4:]
+    return basin_sizes[-3] * basin_sizes[-2] * basin_sizes[-1]
+    # return basin_sizes[-4:]
 
 
 ans = solve_2(vents)

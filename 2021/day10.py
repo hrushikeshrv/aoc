@@ -16,6 +16,7 @@ Part 2 -
 with open('input-10.txt', 'r') as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
 
+# TODO - Delete all test files when done
 with open('input-10-test.txt', 'r') as file:
     test_lines = list(map(lambda x: x.strip(), file.readlines()))
 
