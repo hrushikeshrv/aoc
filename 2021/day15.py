@@ -1,5 +1,9 @@
 """
 Problem 15 - https://adventofcode.com/2021/day/15
+
+Part 1 -
+    Given a 2D map, return the path through the map such that the sum of numbers you pass through is
+    minimum
 """
 
 # Set up the input
@@ -40,6 +44,51 @@ def solve_1(vent_map, max_x, max_y, cache):
     return shortest_path(0, 0, max_x, max_y, cache, vent_map) - int(vent_map[0][0])
     
 
-ans = solve_1(vents, max_x_1, max_y_1, cache_1)
-print(ans)
+# ans = solve_1(vents, max_x_1, max_y_1, cache_1)
+# print(ans)
 # Answer was 626
+
+
+# Define helper functions
+def augment_row(row):
+    row_len = int(len(row)/5)
+    augmentation_string = '0' * row_len + '1' * row_len + '2' * row_len + '3' * row_len + '4' * row_len
+    new_row = ''
+    for j in range(row_len*5):
+        _ = int(row[j]) + int(augmentation_string[j])
+        if _ >= 10:
+            _ -= 9
+        new_row += str(_)
+    return new_row
+
+
+def expand_map(vent_map):
+    for i in range(len(vent_map)):
+        vent_map[i] *= 5
+        vent_map[i] = augment_row(vent_map[i])
+    prev_vent_map = vent_map.copy()
+    for j in range(1, 5):
+        for k in prev_vent_map:
+            new_row = ''
+            for char in k:
+                _ = int(char) + j
+                if _ >= 10:
+                    _ -= 9
+                new_row += str(_)
+            vent_map.append(new_row)
+    return vent_map
+
+
+def solve_2(vent_map):
+    vent_map = expand_map(vent_map)
+    cache = [[None for x in range(len(vent_map))] for y in range(len(vent_map[0]))]
+    max_x = len(vent_map[0]) - 1
+    max_y = len(vent_map) - 1
+    s = shortest_path(0, 0, max_x, max_y, cache, vent_map) - int(vent_map[0][0])
+    # for row in cache:
+    #     print(row)
+    return s
+
+
+ans = solve_2(test_vents)
+print(ans)
