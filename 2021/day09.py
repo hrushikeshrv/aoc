@@ -92,6 +92,9 @@ def fill_basin(vent_map, x, y, max_x, max_y, visited_points):
     size = 1
     visited_points.add((x, y))
     for n in [(x+1, y), (x, y+1), (x-1, y), (x, y-1)]:
+        # If the new point is within the boundaries of the map
+        # and the new point is not a 9
+        # and we have not visited this point before, then recurse here
         if 0 <= n[0] <= max_x and 0 <= n[1] <= max_y and vent_map[n[1]][n[0]] != '9' and n not in visited_points:
             size += fill_basin(vent_map, n[0], n[1], max_x, max_y, visited_points)
     return size
