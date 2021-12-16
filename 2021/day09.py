@@ -1,13 +1,18 @@
 """
 Problem 9 - https://adventofcode.com/2021/day/9
+
+Part 1 -
+    Given a 2D map of vent heights, find the lowest points and return the
+    sum of their "risk" values
+
+Part 2 -
+    Given the same 2D map, find all the "basins" in the map and return
+    the product of the 3 largest basins
 """
 
 # Set up the input
 with open('input-09.txt', 'r') as file:
     vents = list(map(lambda x: x.strip(), file.readlines()))
-
-with open('input-09-test.txt', 'r') as file:
-    test_vents = list(map(lambda x: x.strip(), file.readlines()))
 
 
 # Define helper functions
@@ -51,8 +56,8 @@ def solve_1(vent_map):
     return risk
 
 
-# ans = solve_1(vents)
-# print(ans)
+ans = solve_1(vents)
+print(ans)
 # Answer was 468
 
 
@@ -83,46 +88,27 @@ def get_low_points(vent_map):
     return low_points
 
 
-def fill_basin(vent_map, starting_point, max_x, max_y, visited_points):
-    # print(f'Starting from low point {starting_point} - {vent_map[starting_point[1]][starting_point[0]]}')
-    visited_points.add(starting_point)
-    new_points = set()
-    basin_points = {(starting_point[0], starting_point[1])}
-    neighbours = get_new_neighbours(starting_point[0], starting_point[1], max_x, max_y, visited_points)
-    for n in neighbours:
-        # If this neighbour is also a low point, add it to new_points
-        second_neighbours = get_new_neighbours(n[0], n[1], max_x, max_y, visited_points)
-        smallest = True
-        number = int(vent_map[n[1]][n[0]])
-        # print(f'Considering point {n} - {number}')
-        for n2 in second_neighbours:
-            # print(f'Found neighbour {n2} - {vent_map[n2[1]][n2[0]]}')
-            if int(vent_map[n2[1]][n2[0]]) <= number:
-                smallest = False
-        if smallest and len(second_neighbours) > 0:
-            # print(f'{number} is in the basin because it is smaller than its neighbours {second_neighbours}')
-            new_points.add(n)
-            basin_points.add(n)
-    new_points = new_points.difference(visited_points)
-    for new_point in new_points:
-        basin_points.update(fill_basin(vent_map, new_point, max_x, max_y, visited_points))
-    return basin_points
+def fill_basin(vent_map, x, y, max_x, max_y, visited_points):
+    size = 1
+    visited_points.add((x, y))
+    for n in [(x+1, y), (x, y+1), (x-1, y), (x, y-1)]:
+        if 0 <= n[0] <= max_x and 0 <= n[1] <= max_y and vent_map[n[1]][n[0]] != '9' and n not in visited_points:
+            size += fill_basin(vent_map, n[0], n[1], max_x, max_y, visited_points)
+    return size
 
 
 def solve_2(vent_map):
     low_points = get_low_points(vent_map)
-    # print(f'Found low points {low_points}')
     max_x = len(vent_map[0]) - 1
     max_y = len(vent_map) - 1
     basin_sizes = []
     for point in low_points:
-        basin = fill_basin(vent_map, point, max_x, max_y, set())
-        # print(f'Found basin {basin}')
-        basin_sizes.append(len(basin))
-    basin_sizes.sort()
-    return basin_sizes[-3] * basin_sizes[-2] * basin_sizes[-1]
-    # return basin_sizes[-4:]
+        basin = fill_basin(vent_map, point[0], point[1], max_x, max_y, set())
+        basin_sizes.append(basin)
+    basin_sizes.sort(reverse=True)
+    return basin_sizes[0] * basin_sizes[1] * basin_sizes[2]
 
 
 ans = solve_2(vents)
 print(ans)
+# Answer was 1280496

@@ -44,8 +44,8 @@ def solve_1(vent_map, max_x, max_y, cache):
     return shortest_path(0, 0, max_x, max_y, cache, vent_map) - int(vent_map[0][0])
     
 
-# ans = solve_1(vents, max_x_1, max_y_1, cache_1)
-# print(ans)
+ans = solve_1(vents, max_x_1, max_y_1, cache_1)
+print(ans)
 # Answer was 626
 
 
