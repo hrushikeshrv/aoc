@@ -1,40 +1,6 @@
 with open('input-07.txt', 'r') as file:
     commands = list(map(lambda x: x.strip(), file.readlines()))
 
-# commands = [
-#     '$ cd /',
-#     '$ ls',
-#     'dir a',
-#     '14848514 b.txt',
-#     '8504156 c.dat',
-#     'dir d',
-#     '$ cd a',
-#     '$ ls',
-#     'dir e',
-#     '29116 f',
-#     '2557 g',
-#     '62596 h.lst',
-#     '$ cd e',
-#     '$ ls',
-#     '584 i',
-
-#     # 'dir f',
-#     # '$ cd f',
-#     # '$ ls',
-#     # '111 file',
-#     # '222 file',
-#     # '$ cd ..',
-
-#     '$ cd ..',
-#     '$ cd ..',
-#     '$ cd d',
-#     '$ ls',
-#     '4060174 j',
-#     '8033020 d.log',
-#     '5626152 d.ext',
-#     '7214296 k',
-# ]
-
 dirs = {}
 def calc_size(dir_name, cmds):
     dir_stack = [dir_name]
