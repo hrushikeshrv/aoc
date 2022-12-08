@@ -34,7 +34,6 @@ def calc_size(dir_name, cmds):
 
 def solve1(cmds):
     calc_size('/', cmds[1:])
-    print(dirs)
     size = 0
     for s in dirs.values():
         if s <= 100000:
