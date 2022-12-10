@@ -1,4 +1,4 @@
-with open('input-08.txt', 'r') as file:
+with open('inputs/input-08.txt', 'r') as file:
     trees = list(map(lambda x: x.strip(), file.readlines()))
 
 

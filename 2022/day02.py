@@ -1,4 +1,4 @@
-with open('input-02.txt.', 'r') as file:
+with open('inputs/input-02.txt.', 'r') as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
 
 def solve_1(strat):

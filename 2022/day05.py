@@ -1,4 +1,4 @@
-with open('input-05.txt', 'r') as file:
+with open('inputs/input-05.txt', 'r') as file:
     instructions = file.readlines()
     c = 0
     for i in range(len(instructions)):

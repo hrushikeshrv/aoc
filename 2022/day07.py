@@ -1,4 +1,4 @@
-with open('input-07.txt', 'r') as file:
+with open('inputs/input-07.txt', 'r') as file:
     commands = list(map(lambda x: x.strip(), file.readlines()))
 
 dirs = {}

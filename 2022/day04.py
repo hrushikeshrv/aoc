@@ -1,4 +1,4 @@
-with open('input-04.txt.', 'r') as file:
+with open('inputs/input-04.txt.', 'r') as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
 
 def solve1(lines):

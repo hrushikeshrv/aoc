@@ -1,4 +1,4 @@
-with open('input-06.txt', 'r') as file:
+with open('inputs/input-06.txt', 'r') as file:
     line = file.read().strip()
 
 

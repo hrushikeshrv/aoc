@@ -1,4 +1,4 @@
-with open('input-09.txt', 'r') as file:
+with open('inputs/input-09.txt', 'r') as file:
     moves = list(map(lambda x: x.strip(), file.readlines()))
 
 

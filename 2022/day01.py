@@ -1,5 +1,5 @@
 # Set up the input
-with open('input-01.txt.', 'r') as file:
+with open('inputs/input-01.txt.', 'r') as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
 
 def solve_1(cals):
