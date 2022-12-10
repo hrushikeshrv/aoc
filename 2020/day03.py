@@ -2,14 +2,14 @@
 Problem 3 - https://adventofcode.com/2020/day/3
 
 Part 1 -
-    Given an infinite grid of '.' and '#', follow a certain path through the grid and count how many '#'s you encounter
+    Given an infinite grid of '.' and '#', move a certain path through the grid and count how many '#'s you encounter
 
 Part 2 -
-    Same as part 1 with multiple paths to follow and count
+    Same as part 1 with multiple paths to move and count
 """
 
 # Set up the input
-with open('input-03122020.txt', 'r') as file:
+with open('inputs/input-03122020.txt', 'r') as file:
     s = file.readlines()
 # Remove the \n at the end of each line
 s = [x[:-1] for x in s]

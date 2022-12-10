@@ -10,7 +10,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-04.txt', 'r') as file:
+with open('inputs/input-04.txt', 'r') as file:
     lines = file.readlines()
     draws = lines[0].split(',')
     boards = []

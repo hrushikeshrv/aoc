@@ -9,7 +9,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-13122020.txt', 'r') as file:
+with open('inputs/input-13122020.txt', 'r') as file:
     data = file.readlines()
 
 earliest_departure = int(data[0])

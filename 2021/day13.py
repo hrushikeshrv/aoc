@@ -35,7 +35,7 @@ def build_map(lines, line_count):
     return dots, folds
 
 
-with open('input-13.txt', 'r') as file:
+with open('inputs/input-13.txt', 'r') as file:
     dot_coordinates = file.readlines()
     dots, folds = build_map(dot_coordinates, 928)
     

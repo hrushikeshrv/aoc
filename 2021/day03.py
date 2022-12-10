@@ -11,7 +11,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-03.txt', 'r') as file:
+with open('inputs/input-03.txt', 'r') as file:
     lines = file.readlines()
 
 

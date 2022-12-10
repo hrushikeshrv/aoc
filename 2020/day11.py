@@ -11,7 +11,7 @@ Part 2 -
 from typing import List
 
 # Set up the input
-with open('input-11122020.txt', 'r') as file:
+with open('inputs/input-11122020.txt', 'r') as file:
     s = file.readlines()
 
 seats_1 = [x[:-1] for x in s]

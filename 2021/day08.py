@@ -11,7 +11,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-08.txt', 'r') as file:
+with open('inputs/input-08.txt', 'r') as file:
     signals = file.readlines()
 
 

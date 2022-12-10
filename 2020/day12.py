@@ -9,7 +9,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-12122020.txt', 'r') as file:
+with open('inputs/input-12122020.txt', 'r') as file:
     d = file.readlines()
 
 directions = [(x[0], int(x[1:-1])) for x in d]

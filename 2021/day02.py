@@ -10,7 +10,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-02.txt', 'r') as file:
+with open('inputs/input-02.txt', 'r') as file:
     lines = list(map(lambda x: (x.split()[0], int(x.split()[1])), file.readlines()))
 
 

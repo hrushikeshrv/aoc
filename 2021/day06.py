@@ -10,7 +10,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-06.txt', 'r') as file:
+with open('inputs/input-06.txt', 'r') as file:
     ages = list(map(lambda x: int(x), file.readline().split(',')))
 
 

@@ -7,13 +7,13 @@ Part 1 -
 """
 
 # Set up the input
-with open('input-15.txt', 'r') as file:
+with open('inputs/input-15.txt', 'r') as file:
     vents = list(map(lambda x: x.strip(), file.readlines()))
     max_x_1 = len(vents[0]) - 1
     max_y_1 = len(vents) - 1
     cache_1 = [[None for x in range(max_x_1 + 1)] for y in range(max_y_1 + 1)]
 
-with open('input-15-test.txt', 'r') as file:
+with open('inputs/input-15-test.txt', 'r') as file:
     test_vents = list(map(lambda x: x.strip(), file.readlines()))
     test_max_x = len(test_vents[0]) - 1
     test_max_y = len(test_vents) - 1

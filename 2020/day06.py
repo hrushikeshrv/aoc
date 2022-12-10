@@ -10,7 +10,7 @@ Part 2 -
 from collections import Counter
 
 # Set up the input
-with open('input-06122020.txt', 'r') as file:
+with open('inputs/input-06122020.txt', 'r') as file:
     yesses = file.readlines()
 
 

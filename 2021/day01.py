@@ -9,7 +9,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-01.txt.', 'r') as file:
+with open('inputs/input-01.txt.', 'r') as file:
     lines = list(map(lambda x: int(x), file.readlines()))
 
 

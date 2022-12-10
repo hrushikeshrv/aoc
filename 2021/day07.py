@@ -11,7 +11,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-07.txt', 'r') as file:
+with open('inputs/input-07.txt', 'r') as file:
     pos = sorted(list(map(lambda x: int(x), file.readline().split(','))))
 
 

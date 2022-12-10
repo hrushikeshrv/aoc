@@ -11,10 +11,10 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-11.txt', 'r') as file:
+with open('inputs/input-11.txt', 'r') as file:
     octopuses = list(map(lambda x: list(x.strip()), file.readlines()))
 
-with open('input-11-test.txt', 'r') as file:
+with open('inputs/input-11-test.txt', 'r') as file:
     test_octopuses = list(map(lambda x: list(x.strip()), file.readlines()))
 
 

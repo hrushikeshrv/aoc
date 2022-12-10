@@ -11,7 +11,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-14.txt', 'r') as file:
+with open('inputs/input-14.txt', 'r') as file:
     starting_monomer = file.readline().strip()
     file.readline()
     _ = list(map(lambda x: x.strip(), file.readlines()))

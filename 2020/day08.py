@@ -9,7 +9,7 @@ Part 2 -
 """
 
 # Set up the input
-with open('input-08122020.txt', 'r') as file:
+with open('inputs/input-08122020.txt', 'r') as file:
     instructions = file.readlines()
 
 

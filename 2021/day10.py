@@ -3,7 +3,7 @@ Problem 10 - https://adventofcode.com/2021/day/10
 
 Part 1 -
     Given a sequence of opening and closing characters, find the "score" of the lines
-    which do not follow the opening and closing character order
+    which do not move the opening and closing character order
 
 Part 2 -
     Given the same sequences of opening and closing characters, see if you can
@@ -13,11 +13,11 @@ Part 2 -
 
 
 # Set up the input
-with open('input-10.txt', 'r') as file:
+with open('inputs/input-10.txt', 'r') as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
 
 # TODO - Delete all test files when done
-with open('input-10-test.txt', 'r') as file:
+with open('inputs/input-10-test.txt', 'r') as file:
     test_lines = list(map(lambda x: x.strip(), file.readlines()))
 
 

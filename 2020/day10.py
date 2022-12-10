@@ -10,7 +10,7 @@ Part 1 -
 """
 
 # Set up the input
-with open('input-10122020.txt', 'r') as file:
+with open('inputs/input-10122020.txt', 'r') as file:
     j = file.readlines()
 
 j.append('0\n')
