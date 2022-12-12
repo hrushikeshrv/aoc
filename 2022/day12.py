@@ -1,46 +1,48 @@
+import sys
+sys.setrecursionlimit(10000)
+
 with open('inputs/input-12.txt', 'r') as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
     
-lines = [
-    'aabqponm',
-    'abcryxxl',
-    'accszExk',
-    'acctuvwj',
-    'abdefghi',
-]
+# lines = [
+#     'aabqponm',
+#     'abcryxxl',
+#     'accszExk',
+#     'acctuvwj',
+#     'abdefghi',
+# ]
 
 n_rows = len(lines)
 n_cols = len(lines[0])
+MAX_DIST = n_rows * n_cols + 1
 
 
-def find_path(heights, path, end_row, end_col):
-    # Caching and base case
-    global n_rows, n_cols
-    row, col = path[-1]
-    if row == end_row and col == end_col:
-        return 0
-    
-    # Find valid neighbours
-    candidate_squares = []
-    _ = [(row, col-1), (row+1, col), (row, col+1), (row-1, col)]
-    for s in _:
+def find_path(heights, curr_dist, row, col, visited):
+    candidates = [(row, col-1), (row+1, col), (row, col+1), (row-1, col)]
+    neighbours = []
+    for s in candidates:
         if 0 <= s[0] < n_rows and 0 <= s[1] < n_cols:
-            if ord(heights[s[0]][s[1]]) - ord(heights[row][col]) <= 1:
-                if s not in path:
-                    candidate_squares.append(s)
+            if ord(heights[row][col]) - ord(heights[s[0]][s[1]]) <= 1:
+                neighbours.append(s)
+    
+    # if all(s in visited for s in neighbours):
+    #     return
+    relaxed = False
+    for s in neighbours:
+        if 0 <= s[0] < n_rows and 0 <= s[1] < n_cols:
+            if ord(heights[row][col]) - ord(heights[s[0]][s[1]]) <= 1:
+                dist = visited.get(s, MAX_DIST)
+                if dist > 1 + curr_dist:
+                    relaxed = True
+                    visited[s] = 1 + curr_dist
+    if not relaxed:
+        return
+    
+    for s in neighbours:
+        find_path(heights, curr_dist + 1, s[0], s[1], visited)
+    
 
-    if not candidate_squares:
-        return n_rows * n_cols + 100
-    min_dist = n_rows * n_cols + 100
-    for square in candidate_squares:
-        path.append(square)
-        dist = 1 + find_path(heights, path, end_row, end_col)
-        if dist < min_dist:
-            min_dist = dist
-        path.pop()
-    return min_dist
-
-
+visited = {}
 def solve1(heights: list[str]):
     start_row = 0
     start_col = 0
@@ -62,8 +64,25 @@ def solve1(heights: list[str]):
             heights[start_row] = heights[start_row][:start_col] + 'a' + heights[start_row][start_col + 1:]
             break
         i += 1
-    return find_path(heights, [(start_row, start_col)], end_row, end_col)
+    visited[(end_row, end_col)] = 0
+    find_path(heights, 0, end_row, end_col, visited)
+    return visited[(start_row, start_col)]
 
 
 ans = solve1(lines)
 print(ans)
+# Answer was 462
+
+
+def solve2(heights):
+    min_dist = MAX_DIST
+    for s in visited:
+        if heights[s[0]][s[1]] == 'a':
+            if visited[s] < min_dist:
+                min_dist = visited[s]
+    return min_dist
+
+
+ans = solve2(lines)
+print(ans)
+# Answer was 451
