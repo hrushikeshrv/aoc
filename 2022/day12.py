@@ -3,14 +3,6 @@ sys.setrecursionlimit(10000)
 
 with open('inputs/input-12.txt', 'r') as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
-    
-# lines = [
-#     'aabqponm',
-#     'abcryxxl',
-#     'accszExk',
-#     'acctuvwj',
-#     'abdefghi',
-# ]
 
 n_rows = len(lines)
 n_cols = len(lines[0])
@@ -25,8 +17,6 @@ def find_path(heights, curr_dist, row, col, visited):
             if ord(heights[row][col]) - ord(heights[s[0]][s[1]]) <= 1:
                 neighbours.append(s)
     
-    # if all(s in visited for s in neighbours):
-    #     return
     relaxed = False
     for s in neighbours:
         if 0 <= s[0] < n_rows and 0 <= s[1] < n_cols:
@@ -43,6 +33,8 @@ def find_path(heights, curr_dist, row, col, visited):
     
 
 visited = {}
+
+
 def solve1(heights: list[str]):
     start_row = 0
     start_col = 0
