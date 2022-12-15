@@ -1,26 +1,16 @@
-with open('inputs/input-15.txt', 'r') as file:
+with open("inputs/input-15.txt", "r") as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
-
-# lines = [
-#     'Sensor at x=2, y=18: closest beacon is at x=-2, y=15',
-#     'Sensor at x=9, y=16: closest beacon is at x=10, y=16',
-#     'Sensor at x=13, y=2: closest beacon is at x=15, y=3',
-#     'Sensor at x=12, y=14: closest beacon is at x=10, y=16',
-#     'Sensor at x=10, y=20: closest beacon is at x=10, y=16',
-#     'Sensor at x=14, y=17: closest beacon is at x=10, y=16',
-#     'Sensor at x=8, y=7: closest beacon is at x=2, y=10',
-#     'Sensor at x=2, y=0: closest beacon is at x=2, y=10',
-#     'Sensor at x=0, y=11: closest beacon is at x=2, y=10',
-#     'Sensor at x=20, y=14: closest beacon is at x=25, y=17',
-#     'Sensor at x=17, y=20: closest beacon is at x=21, y=22',
-#     'Sensor at x=16, y=7: closest beacon is at x=15, y=3',
-#     'Sensor at x=14, y=3: closest beacon is at x=15, y=3',
-#     'Sensor at x=20, y=1: closest beacon is at x=15, y=3',
-# ]
 
 coords = []
 for line in lines:
-    l = line.replace('Sensor at ', '').replace(': closest beacon is at ', ' ').replace(',', '').replace('x=', '').replace('y=', '').split()
+    l = (
+        line.replace("Sensor at ", "")
+        .replace(": closest beacon is at ", " ")
+        .replace(",", "")
+        .replace("x=", "")
+        .replace("y=", "")
+        .split()
+    )
     coords.append((int(l[0]), int(l[1]), int(l[2]), int(l[3])))
 
 
@@ -48,3 +38,40 @@ print(solve1(coords, 2000000))
 # Answer was 4665948
 
 
+def merge_ranges(ranges):
+    ranges.sort(key=lambda x: x[0])
+    merged_ranges = []
+    for i in range(len(ranges) - 1):
+        r1 = ranges[i]
+        r2 = ranges[i + 1]
+        if r2[0] <= r1[1] <= r2[1] or r2[0] == r1[1] + 1:
+            ranges[i + 1] = [r1[0], r2[1]]
+        elif r1[0] <= r2[0] and r1[1] >= r2[1]:
+            ranges[i + 1] = r1
+            continue
+        else:
+            merged_ranges.append(r1)
+    merged_ranges.append(ranges[-1])
+    return merged_ranges
+
+
+def solve2(sensor_grid):
+    for row in range(4000001):
+        no_beacon_list = []
+        for s in sensor_grid:
+            sensor_x = s[0]
+            sensor_y = s[1]
+            distance = abs(s[0] - s[2]) + abs(s[1] - s[3])
+            remaining_distance = distance - abs(row - sensor_y)
+            if remaining_distance < 0:
+                continue
+            no_beacon_list.append(
+                [sensor_x - remaining_distance, sensor_x + remaining_distance]
+            )
+        no_beacon_ranges = merge_ranges(no_beacon_list)
+        if len(no_beacon_ranges) > 1:
+            return 4000000 * (no_beacon_ranges[0][1] + 1) + row
+
+
+print(solve2(coords))
+# Answer was 13543690671045
