@@ -1,4 +1,8 @@
+# Don't include input files, as topaz requests
 inputs/
+
+.idea/
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
