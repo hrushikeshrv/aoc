@@ -27,24 +27,45 @@ for line in lines:
     valves[l[0]] = (int(l[1]), l[2:])
 
 
-def max_flow(valve_graph, path, minutes_left):
-    if minutes_left < 1:
-        return 0
-    current_node = path[-1]
-
-    candidates = []
-    for neighbour in valve_graph[current_node][1]:
-        if neighbour not in path:
-            path.append(neighbour)
-            candidates.append(
-                valve_graph[current_node][0] * (minutes_left - 1)
-                + max_flow(valve_graph, path, minutes_left - 2)
-            )
-            candidates.append(max_flow(valve_graph, path, minutes_left - 1))
-            path.pop()
-    if not candidates:
-        return 0
-    return max(candidates)
+def floyd_warshall(valve_graph):
+    distances = {u: {v: 1e10 for v in valve_graph} for u in valve_graph}
+    for i in valve_graph:
+        distances[i][i] = 0
+        for n in valve_graph[i][1]:
+            distances[i][n] = 1
+    
+    for i in valve_graph:
+        for j in valve_graph:
+            for k in valve_graph:
+                distances[j][k] = min(distances[j][k], distances[j][i] + distances[i][k])
+    
+    return distances
 
 
-print(max_flow(valves, ["AA"], 30))
+distances = floyd_warshall(valves)
+
+
+def get_score(valve_graph, traversal):
+    score = 0
+    for node in traversal:
+        score += valve_graph[node][0] * traversal[node]
+    return score
+
+
+def get_traversals(distances, valve_graph, time=30, cur='AA', chosen={}):
+    yield chosen
+
+    for nxt in valve_graph[cur][1]:
+        if valve_graph[nxt][0] == 0:
+            continue
+        new_time = time - (distances[cur][nxt] + 1)
+        if new_time < 2:
+            return
+        new_chosen = chosen | {nxt: new_time}
+        new_valves = valve_graph.copy()
+        # del new_valves[nxt]
+        yield from get_traversals(distances, new_valves, new_time, nxt, new_chosen)
+        
+
+best = max(get_score(valves, c) for c in get_traversals(distances, valves))
+print(best)
