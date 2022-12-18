@@ -1,11 +1,12 @@
-with open('inputs/input-03.txt.', 'r') as file:
+with open("inputs/input-03.txt.", "r") as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
+
 
 def solve1(lines):
     score = 0
     for line in lines:
-        s1 = set(line[:len(line)//2])
-        s2 = set(line[len(line)//2:])
+        s1 = set(line[: len(line) // 2])
+        s2 = set(line[len(line) // 2 :])
         common = list(s2.intersection(s1))[0]
         if common.islower():
             _ = ord(common) - 96
@@ -14,15 +15,17 @@ def solve1(lines):
         score += _
     return score
 
+
 ans = solve1(lines)
 print(ans)
 # Answer was 8085
+
 
 def solve2(lines):
     i = 0
     score = 0
     while i < len(lines):
-        group = lines[i:i+3]
+        group = lines[i : i + 3]
         i += 3
         s1 = set(group[0])
         s2 = set(group[1])
@@ -34,6 +37,7 @@ def solve2(lines):
             _ = ord(common) - 38
         score += _
     return score
+
 
 ans = solve2(lines)
 print(ans)

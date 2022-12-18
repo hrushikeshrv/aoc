@@ -1,7 +1,8 @@
 import sys
+
 sys.setrecursionlimit(10000)
 
-with open('inputs/input-12.txt', 'r') as file:
+with open("inputs/input-12.txt", "r") as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
 
 n_rows = len(lines)
@@ -10,13 +11,13 @@ MAX_DIST = n_rows * n_cols + 1
 
 
 def find_path(heights, curr_dist, row, col, visited):
-    candidates = [(row, col-1), (row+1, col), (row, col+1), (row-1, col)]
+    candidates = [(row, col - 1), (row + 1, col), (row, col + 1), (row - 1, col)]
     neighbours = []
     for s in candidates:
         if 0 <= s[0] < n_rows and 0 <= s[1] < n_cols:
             if ord(heights[row][col]) - ord(heights[s[0]][s[1]]) <= 1:
                 neighbours.append(s)
-    
+
     relaxed = False
     for s in neighbours:
         if 0 <= s[0] < n_rows and 0 <= s[1] < n_cols:
@@ -27,10 +28,10 @@ def find_path(heights, curr_dist, row, col, visited):
                     visited[s] = 1 + curr_dist
     if not relaxed:
         return
-    
+
     for s in neighbours:
         find_path(heights, curr_dist + 1, s[0], s[1], visited)
-    
+
 
 visited = {}
 
@@ -42,18 +43,24 @@ def solve1(heights: list[str]):
     end_col = 0
     i = 0
     while i < len(heights):
-        if 'E' in heights[i]:
+        if "E" in heights[i]:
             end_row = i
-            end_col = heights[i].index('E')
-            heights[end_row] = heights[end_row][:end_col] + 'z' + heights[end_row][end_col+1:]
+            end_col = heights[i].index("E")
+            heights[end_row] = (
+                heights[end_row][:end_col] + "z" + heights[end_row][end_col + 1 :]
+            )
             break
         i += 1
     i = 0
     while i < len(heights):
-        if 'S' in heights[i]:
+        if "S" in heights[i]:
             start_row = i
-            start_col = heights[i].index('S')
-            heights[start_row] = heights[start_row][:start_col] + 'a' + heights[start_row][start_col + 1:]
+            start_col = heights[i].index("S")
+            heights[start_row] = (
+                heights[start_row][:start_col]
+                + "a"
+                + heights[start_row][start_col + 1 :]
+            )
             break
         i += 1
     visited[(end_row, end_col)] = 0
@@ -69,7 +76,7 @@ print(ans)
 def solve2(heights):
     min_dist = MAX_DIST
     for s in visited:
-        if heights[s[0]][s[1]] == 'a':
+        if heights[s[0]][s[1]] == "a":
             if visited[s] < min_dist:
                 min_dist = visited[s]
     return min_dist

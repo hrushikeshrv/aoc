@@ -1,4 +1,4 @@
-with open('inputs/input-08.txt', 'r') as file:
+with open("inputs/input-08.txt", "r") as file:
     trees = list(map(lambda x: x.strip(), file.readlines()))
 
 
@@ -8,11 +8,11 @@ def solve1(trees):
     visible = set()
     for i in range(rows):
         visible.add((i, 0))
-        visible.add((i, cols-1))
+        visible.add((i, cols - 1))
     for i in range(cols):
         visible.add((0, i))
-        visible.add((rows-1, i))
-    
+        visible.add((rows - 1, i))
+
     for r in range(rows):
         highest_yet = 0
         for c in range(cols):
@@ -20,15 +20,15 @@ def solve1(trees):
             if tree > highest_yet:
                 visible.add((r, c))
                 highest_yet = tree
-    
+
     for r in range(rows):
         highest_yet = 0
-        for c in range(cols-1, -1, -1):
+        for c in range(cols - 1, -1, -1):
             tree = int(trees[r][c])
             if tree > highest_yet:
                 visible.add((r, c))
                 highest_yet = tree
-    
+
     for c in range(cols):
         highest_yet = 0
         for r in range(rows):
@@ -36,23 +36,25 @@ def solve1(trees):
             if tree > highest_yet:
                 visible.add((r, c))
                 highest_yet = tree
-    
+
     for c in range(cols):
         highest_yet = 0
-        for r in range(rows-1, -1, -1):
+        for r in range(rows - 1, -1, -1):
             tree = int(trees[r][c])
             if tree > highest_yet:
                 visible.add((r, c))
                 highest_yet = tree
-    
+
     return len(visible)
+
 
 ans = solve1(trees)
 print(ans)
 # Answer was 1798
 
+
 def viewing_distance(row, col, n_rows, n_cols):
-    if row == 0 or row == n_rows-1 or col == 0 or col == n_cols-1:
+    if row == 0 or row == n_rows - 1 or col == 0 or col == n_cols - 1:
         return 0
 
     height = int(trees[row][col])
@@ -75,7 +77,7 @@ def viewing_distance(row, col, n_rows, n_cols):
         right += 1
         if int(trees[row][c]) >= height:
             break
-    
+
     up = 0
     r = row
     while r >= 0:
@@ -85,7 +87,7 @@ def viewing_distance(row, col, n_rows, n_cols):
         up += 1
         if int(trees[r][col]) >= height:
             break
-    
+
     down = 0
     r = row
     while r < n_rows:
@@ -95,7 +97,7 @@ def viewing_distance(row, col, n_rows, n_cols):
         down += 1
         if int(trees[r][col]) >= height:
             break
-    
+
     return up * right * down * left
 
 
@@ -109,6 +111,7 @@ def solve2(trees):
             if dist > max_view:
                 max_view = dist
     return max_view
+
 
 ans = solve2(trees)
 print(ans)

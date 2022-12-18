@@ -33,12 +33,14 @@ def floyd_warshall(valve_graph):
         distances[i][i] = 0
         for n in valve_graph[i][1]:
             distances[i][n] = 1
-    
+
     for i in valve_graph:
         for j in valve_graph:
             for k in valve_graph:
-                distances[j][k] = min(distances[j][k], distances[j][i] + distances[i][k])
-    
+                distances[j][k] = min(
+                    distances[j][k], distances[j][i] + distances[i][k]
+                )
+
     return distances
 
 
@@ -52,7 +54,7 @@ def get_score(valve_graph, traversal):
     return score
 
 
-def get_traversals(distances, valve_graph, time=30, cur='AA', chosen={}):
+def get_traversals(distances, valve_graph, time=30, cur="AA", chosen={}):
     yield chosen
 
     for nxt in valve_graph[cur][1]:
@@ -65,7 +67,7 @@ def get_traversals(distances, valve_graph, time=30, cur='AA', chosen={}):
         new_valves = valve_graph.copy()
         # del new_valves[nxt]
         yield from get_traversals(distances, new_valves, new_time, nxt, new_chosen)
-        
+
 
 best = max(get_score(valves, c) for c in get_traversals(distances, valves))
 print(best)

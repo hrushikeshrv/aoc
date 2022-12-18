@@ -1,4 +1,4 @@
-with open('inputs/input-13.txt', 'r') as file:
+with open("inputs/input-13.txt", "r") as file:
     lines = list(map(lambda x: x.strip(), file.readlines()))
 
 
@@ -23,30 +23,30 @@ def compare(left, right):
                 return 1
             elif right[i] < left[i]:
                 return 0
-        
+
         if isinstance(left[i], list) and isinstance(right[i], list):
             result = compare(left[i], right[i])
             if result is not None:
                 return result
-        
+
         if isinstance(left[i], list) and isinstance(right[i], int):
             result = compare(left[i], [right[i]])
             if result is not None:
                 return result
-        
+
         if isinstance(left[i], int) and isinstance(right[i], list):
             result = compare([left[i]], right[i])
             if result is not None:
                 return result
-        
+
         i += 1
 
 
 def solve1(packets):
     correct_order = 0
     i = 0
-    while i < len(packets)-1:
-        res = compare(packets[i], packets[i+1])
+    while i < len(packets) - 1:
+        res = compare(packets[i], packets[i + 1])
         if res == 1:
             correct_order += i // 2 + 1
         i += 2
@@ -61,10 +61,10 @@ def solve2(packets):
     packets.append([[2]])
     packets.append([[6]])
     for i in range(len(packets)):
-        for j in range(i+1, len(packets)):
+        for j in range(i + 1, len(packets)):
             if compare(packets[i], packets[j]) == 0:
                 packets[i], packets[j] = packets[j], packets[i]
-    
+
     return (packets.index([[2]]) + 1) * (packets.index([[6]]) + 1)
 
 

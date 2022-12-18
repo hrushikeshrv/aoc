@@ -1,9 +1,9 @@
-with open('inputs/input-09.txt', 'r') as file:
+with open("inputs/input-09.txt", "r") as file:
     moves = list(map(lambda x: x.strip(), file.readlines()))
 
 
 def move(tail, head, direction):
-    if direction == 'U':
+    if direction == "U":
         head[1] += 1
         if tail[0] == head[0]:
             if head[1] - tail[1] > 1:
@@ -14,8 +14,8 @@ def move(tail, head, direction):
                 tail[0] += 1
             elif head[0] < tail[0]:
                 tail[0] -= 1
-    
-    elif direction == 'R':
+
+    elif direction == "R":
         head[0] += 1
         if tail[1] == head[1]:
             if head[0] - tail[0] > 1:
@@ -26,8 +26,8 @@ def move(tail, head, direction):
                 tail[1] -= 1
             elif tail[1] < head[1]:
                 tail[1] += 1
-    
-    elif direction == 'D':
+
+    elif direction == "D":
         head[1] -= 1
         if tail[0] == head[0]:
             if tail[1] - head[1] > 1:
@@ -38,8 +38,8 @@ def move(tail, head, direction):
                 tail[0] += 1
             elif head[0] < tail[0]:
                 tail[0] -= 1
-    
-    elif direction == 'L':
+
+    elif direction == "L":
         head[0] -= 1
         if tail[1] == head[1]:
             if tail[0] - head[0] > 1:
@@ -84,34 +84,34 @@ def follow(head, tail):
         (-1, -1): tail,
         (0, -1): tail,
         (1, -1): tail,
-        (0, 2): [tail[0], tail[1]+1],
-        (1, 2): [tail[0]+1, tail[1]+1],
-        (2, 2): [tail[0]+1, tail[1]+1],
-        (2, 1): [tail[0]+1, tail[1]+1],
-        (2, 0): [tail[0]+1, tail[1]],
-        (2, -1): [tail[0]+1, tail[1]-1],
-        (2, -2): [tail[0]+1, tail[1]-1],
-        (1, -2): [tail[0]+1, tail[1]-1],
-        (0, -2): [tail[0], tail[1]-1],
-        (-1, -2): [tail[0]-1, tail[1]-1],
-        (-2, -2): [tail[0]-1, tail[1]-1],
-        (-2, -1): [tail[0]-1, tail[1]-1],
-        (-2, 0): [tail[0]-1, tail[1]],
-        (-2, 1): [tail[0]-1, tail[1]+1],
-        (-2, 2): [tail[0]-1, tail[1]+1],
-        (-1, 2): [tail[0]-1, tail[1]+1],
+        (0, 2): [tail[0], tail[1] + 1],
+        (1, 2): [tail[0] + 1, tail[1] + 1],
+        (2, 2): [tail[0] + 1, tail[1] + 1],
+        (2, 1): [tail[0] + 1, tail[1] + 1],
+        (2, 0): [tail[0] + 1, tail[1]],
+        (2, -1): [tail[0] + 1, tail[1] - 1],
+        (2, -2): [tail[0] + 1, tail[1] - 1],
+        (1, -2): [tail[0] + 1, tail[1] - 1],
+        (0, -2): [tail[0], tail[1] - 1],
+        (-1, -2): [tail[0] - 1, tail[1] - 1],
+        (-2, -2): [tail[0] - 1, tail[1] - 1],
+        (-2, -1): [tail[0] - 1, tail[1] - 1],
+        (-2, 0): [tail[0] - 1, tail[1]],
+        (-2, 1): [tail[0] - 1, tail[1] + 1],
+        (-2, 2): [tail[0] - 1, tail[1] + 1],
+        (-1, 2): [tail[0] - 1, tail[1] + 1],
     }
     return move_map[(x_diff, y_diff)]
 
 
 def print_rope(knots):
-    l = [['.' for i in range(15)] for j in range(15)]
+    l = [["." for i in range(15)] for j in range(15)]
     for i in range(len(knots)):
         k = knots[i]
         l[k[1]][k[0]] = str(i)
     for row in l[::-1]:
-        print(''.join(row))
-    print('\n\n')
+        print("".join(row))
+    print("\n\n")
 
 
 def solve2(lines):
@@ -123,7 +123,7 @@ def solve2(lines):
         for i in range(count):
             knots[1], knots[0] = move(knots[1], knots[0], direction)
             for j in range(2, len(knots)):
-                knots[j] = follow(knots[j-1], knots[j])
+                knots[j] = follow(knots[j - 1], knots[j])
             visited.add(tuple(knots[-1]))
     return len(visited)
 
