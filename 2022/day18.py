@@ -26,11 +26,9 @@ def solve1(cubes):
     surface_area = 0
     for cube in cubes:
         neighbours = get_neighbours(cube)
-        free_sides = 6
         for n in neighbours:
-            if n in cubes:
-                free_sides -= 1
-        surface_area += free_sides
+            if n not in cubes:
+                surface_area += 1
     return surface_area
 
 
