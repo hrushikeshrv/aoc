@@ -6,63 +6,54 @@ with open('inputs/input-20.txt', 'r') as file:
 
 # numbers = [1, 2, -3, 3, -2, 0, 4]
 
-
-def update_idx_of(idx, index_list, delta):
-    for i in range(len(index_list)):
-        if index_list[i][1] == idx:
-            index_list[i][1] += delta
-            return
+numbers = [(numbers[i], i) for i in range(len(numbers))]
 
 
-def move(nums, i, n, index_list):
-    # print(nums)
-    if n == 0:
+def move(nums, start, move_amt, index_map):
+    if move_amt == 0:
         return nums
-    # print(f'Moving {nums[i]} from {i} to {"left" if n < 0 else "right"}')
-    if n > 0:
-        if i == len(nums) - 1:
-            for j in range(1, i):
-                update_idx_of(j, index_list, 1)
-            update_idx_of(i, index_list, 2-len(nums))
-            nums = [nums[0]] + [nums[i]] + nums[1:i]
-            return move(nums, 1, n-1, index_list)
+    if move_amt > 0:
+        if start == len(nums)-1:
+            for j in range(1, start):
+                index_map[nums[j]] += 1
+            index_map[nums[start]] += 2 - len(nums)
+            nums = [nums[0]] + [nums[start]] + nums[1:start]
+            return move(nums, 1, move_amt-1, index_map)
         else:
-            update_idx_of(i+1, index_list, -1)
-            update_idx_of(i, index_list, 1)
-            nums[i+1], nums[i] = nums[i], nums[i+1]
-            return move(nums, i+1, n-1, index_list)
+            index_map[nums[start]] += 1
+            index_map[nums[start+1]] -= 1
+            nums[start], nums[start+1] = nums[start+1], nums[start]
+            return move(nums, start + 1, move_amt - 1, index_map)
     else:
-        if i == 0:
+        if start == 0:
             for j in range(1, len(nums)-1):
-                update_idx_of(j, index_list, -1)
-            update_idx_of(0, index_list, len(nums)-2)
-            # print(f'Wrapped {nums[i]}. Was {nums} ', end='')
+                index_map[nums[j]] -= 1
+            index_map[nums[start]] += len(nums) - 2
             nums = nums[1:len(nums)-1] + [nums[0]] + [nums[-1]]
-            # print(f'Now {nums}')
-            return move(nums, len(nums)-2, n+1, index_list)
+            return move(nums, len(nums)-2, move_amt+1, index_map)
         else:
-            update_idx_of(i-1, index_list, 1)
-            update_idx_of(i, index_list, -1)
-            nums[i], nums[i-1] = nums[i-1], nums[i]
-            return move(nums, i-1, n+1, index_list)
+            index_map[nums[start]] -= 1
+            index_map[nums[start-1]] += 1
+            nums[start], nums[start-1] = nums[start-1], nums[start]
+            return move(nums, start-1, move_amt+1, index_map)
 
 
 def solve1(nums):
-    nums_idx = [[nums[i], i] for i in range(len(nums))]
-    for i in range(len(nums_idx)):
-        n, n_idx = nums_idx[i]
-        # print(f'\n\nMoving {n}')
-        dest = n_idx + n
-        if dest < 0:
-            dest += len(nums) - 1
-        if dest >= len(nums):
-            dest = dest % len(nums)
-        # print(f'{n} will be moved to index {dest}')
-        nums = move(nums, n_idx, n, nums_idx)
-        # print(f'Numbers array now becomes {nums}')
+    order = nums[:]
+    num_index = {(num, idx): idx for num, idx in order}
+    # print(num_index)
     
-    idx = nums.index(0)
-    return sum(nums[(idx + i) % len(nums)] for i in [1000, 2000, 3000])
+    for n in order:
+        idx = num_index[n]
+        # print(f'Moving {n}')
+        nums = move(nums, idx, n[0], num_index)
+        # print([x[0] for x in nums])
+    
+    idx = 0
+    for i in range(len(nums)):
+        if nums[i][0] == 0:
+            idx = i
+    return sum(nums[(idx + i) % len(nums)][0] for i in [1000, 2000, 3000])
 
 
-# print(solve1(numbers))
+print(solve1(numbers))
