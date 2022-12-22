@@ -34,4 +34,5 @@ def get_human_expression(monkey, monkey_jobs):
     return f'({get_human_expression(m1, monkey_jobs)} {op} {get_human_expression(m2, monkey_jobs)})'
 
 print(get_human_expression('root', monkeys))
-# Pasted this expression into this expression solver to get the answer - https://www.mathpapa.com/equation-solver/
+# Pasted this equation into an online equation solver to get the answer,
+# instead of implementing an equation solver - https://www.mathpapa.com/equation-solver/
