@@ -1,4 +1,4 @@
-# Don't include input files, as topaz requests
+# Don't include input files, as requested by the creator [https://www.reddit.com/r/adventofcode/wiki/faqs/copyright/inputs/]
 inputs/
 
 .idea/
