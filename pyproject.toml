@@ -5,6 +5,7 @@ authors = [
     { name="Hrushikesh Vaidya", email="hrushikeshrv@gmail.com" },
 ]
 description = "A small helper package for streamlining Advent of Code tasks"
+readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
