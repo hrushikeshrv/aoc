@@ -1,0 +1,15 @@
+with open('{{ input_path }}') as file:
+    lines = list(map(lambda x: x.strip(), file.readlines()))
+
+
+def solve1(lines):
+    pass
+
+
+def solve2(lines):
+    pass
+
+
+if __name__ == "__main__":
+    print(solve1(lines))
+    print(solve2(lines))
