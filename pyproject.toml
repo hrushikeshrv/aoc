@@ -16,3 +16,6 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/hrushikeshrv/aoc"
 Issues = "https://github.com/hrushikeshrv/aoc/issues"
+
+[project.scripts]
+aoc = "aoc.cli:main"
