@@ -1,9 +1,12 @@
 import argparse
 import datetime
 import importlib.resources as resources
+import requests
 import sys
 
 from pathlib import Path
+
+from aoc.utils import confirm_overwrite
 
 
 def generate_template(year: str, day: str) -> None:
@@ -27,23 +30,11 @@ def generate_template(year: str, day: str) -> None:
 
     file_path = year_dir / f"day{day}.py"
     if file_path.exists():
-        overwrite = (
-            input(
-                f"{file_path} already exists. Do you want to overwrite its contents (y/n)? - "
-            )
-            .strip()[0]
-            .lower()
-        )
-        while overwrite not in ["y", "n"]:
-            overwrite = (
-                input(f'Enter "y" for yes and "n" for no. Got {overwrite} - ')
-                .strip()[0]
-                .lower()
-            )
-        if overwrite != "y":
+        overwrite = confirm_overwrite(file_path)
+        if not overwrite:
             return
         else:
-            print(f"Overwriting {file_path}")
+            print(f'Overwriting {file_path}')
 
     template = resources.files("aoc.templates").joinpath("day_template.txt").read_text()
     lines = template.split("\n")
@@ -58,19 +49,51 @@ def generate_template(year: str, day: str) -> None:
             file.write(line + "\n")
 
 
+def fetch_input(year: str, day: str) -> None:
+    """
+    Fetches input for the given year and day and stores it in "./{year}/inputs/input-{day}.txt"
+    :param year: The AoC year you want to work with
+    :param day: The AoC day you want to work with
+    :return: None
+    """
+    input_url = f'https://adventofcode.com/{year}/day/{day}/input'
+    dest = Path(f'./{year}/inputs')
+
+    print(f'Fetching your input for {year} day {day}.')
+    response = requests.get(input_url)
+    print(response.text)
+
+    if len(day) == 1:
+        day = "0" + day
+
+    input_path = dest / f'input-{day}.txt'
+    if input_path.exists():
+        overwrite = confirm_overwrite(input_path)
+        if not overwrite:
+            return
+        else:
+            print(f'Overwriting {input_path}')
+
+
 def main():
     parser = argparse.ArgumentParser(
         prog=__package__,
         description="A small helper package for streamlining Advent of Code tasks",
     )
 
-    parser.add_argument("day", type=int, help="The AoC day you want to work with.")
     parser.add_argument(
         "year",
         type=int,
         help="The AoC year you want to work with.",
         nargs="?",
         default=datetime.datetime.now().year,
+    )
+    parser.add_argument(
+        "day",
+        type=int,
+        nargs="?",
+        help="The AoC day you want to work with.",
+        default=datetime.datetime.now().day,
     )
     parser.add_argument(
         "-c",
@@ -95,6 +118,6 @@ def main():
         generate_template(str(args.year), str(args.day))
 
     if args.fetch:
-        raise NotImplementedError("Fetching input is not yet implemented")
+        fetch_input(str(args.year), str(args.day))
 
     sys.exit(0)
