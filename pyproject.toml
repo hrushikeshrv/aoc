@@ -1,0 +1,17 @@
+[project]
+name = "aoc"
+version = "0.1.0"
+authors = [
+    { name="Hrushikesh Vaidya", email="hrushikeshrv@gmail.com" },
+]
+description = "A small helper package for streamlining Advent of Code tasks"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/hrushikeshrv/aoc"
+Issues = "https://github.com/hrushikeshrv/aoc/issues"
