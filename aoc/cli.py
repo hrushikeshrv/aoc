@@ -6,7 +6,7 @@ import sys
 
 from pathlib import Path
 
-from aoc.utils import confirm_overwrite
+from aoc.utils import confirm_overwrite, get_session_token, set_session_token, get_request_headers
 
 
 def generate_template(year: str, day: str) -> None:
@@ -56,12 +56,7 @@ def fetch_input(year: str, day: str) -> None:
     :param day: The AoC day you want to work with
     :return: None
     """
-    input_url = f'https://adventofcode.com/{year}/day/{day}/input'
     dest = Path(f'./{year}/inputs')
-
-    print(f'Fetching your input for {year} day {day}.')
-    response = requests.get(input_url)
-    print(response.text)
 
     if len(day) == 1:
         day = "0" + day
@@ -73,6 +68,16 @@ def fetch_input(year: str, day: str) -> None:
             return
         else:
             print(f'Overwriting {input_path}')
+
+    session_token = get_session_token()
+    if not session_token:
+        print('Couldn\'t get your session token.')
+        set_session_token()
+
+    input_url = f'https://adventofcode.com/{year}/day/{day}/input'
+    print(f'Fetching your input for {year} day {day}.')
+    response = requests.get(input_url, cookies={'session': session_token}, headers=get_request_headers())
+    print(response.text)
 
 
 def main():
