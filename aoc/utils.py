@@ -10,9 +10,7 @@ def confirm_overwrite(path: Path | str) -> bool:
     :return: True if the path should be overwritten, False otherwise.
     """
     overwrite = (
-        input(
-            f"{path} already exists. Do you want to overwrite its contents (y/n)? - "
-        )
+        input(f"{path} already exists. Do you want to overwrite its contents (y/n)? - ")
         .strip()[0]
         .lower()
     )
@@ -22,31 +20,36 @@ def confirm_overwrite(path: Path | str) -> bool:
             .strip()[0]
             .lower()
         )
-    return overwrite == 'y'
+    return overwrite == "y"
 
 
 def get_session_token() -> str:
     """
-    Gets the stored session token from aoc.data.session_token
+    Gets the stored session token from aoc.data.session_token.txt
     :return: The stored token, or an empty string if the token is not found
     """
     try:
-        return resources.files('aoc.data').joinpath('session_token').read_text()
+        return resources.files("aoc.data").joinpath("session_token.txt").read_text()
     except FileNotFoundError:
-        return ''
+        return ""
 
 
-def set_session_token() -> str:
+def set_session_token(token: str | None = None) -> str:
     """
     Prompts the user to enter their session token, stores it in the session file, and returns the same token
     :return: The token entered by the user
     """
-    token = input('Enter your session token here, and it will be saved for future requests - ')
-    while not token:
-        print(f'Got an invalid token - {token}.')
-        token = input('Enter your session token here, and it will be saved for future requests - ')
-    token_path = Path('./aoc/data/session_token')
-    with open(token_path) as f:
+    if token is None:
+        token = input(
+            "Enter your session token here, and it will be saved for future requests - "
+        ).strip()
+        while not token:
+            print(f"Got an invalid token - {token}.")
+            token = input(
+                "Enter your session token here, and it will be saved for future requests - "
+            ).strip()
+    token_path = Path("./aoc/data/session_token.txt")
+    with open(token_path, 'w') as f:
         f.write(token)
     return token
 
@@ -57,5 +60,5 @@ def get_request_headers() -> dict[str, str]:
     :return: A dictionary of request headers
     """
     return {
-        'User-Agent': f'https://github.com/hrushikeshrv/aoc contact:hrushikeshrv@gmail.com'
+        "User-Agent": f"https://github.com/hrushikeshrv/aoc contact:hrushikeshrv@gmail.com"
     }
