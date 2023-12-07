@@ -98,6 +98,6 @@ def fetch_input(year: str, day: str) -> None:
             headers=get_request_headers(),
         )
 
-    with open(input_path) as f:
+    with open(input_path, "w") as f:
         f.write(response.text)
     print(f"Input stored successfully in {input_path}")

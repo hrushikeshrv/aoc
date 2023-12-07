@@ -49,7 +49,7 @@ def set_session_token(token: str | None = None) -> str:
                 "Enter your session token here, and it will be saved for future requests - "
             ).strip()
     token_path = Path("./aoc/data/session_token.txt")
-    with open(token_path, 'w') as f:
+    with open(token_path, "w") as f:
         f.write(token)
     return token
 
