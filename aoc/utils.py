@@ -60,5 +60,5 @@ def get_request_headers() -> dict[str, str]:
     :return: A dictionary of request headers
     """
     return {
-        "User-Agent": f"https://github.com/hrushikeshrv/aoc contact:hrushikeshrv@gmail.com"
+        "User-Agent": "https://github.com/hrushikeshrv/aoc contact:hrushikeshrv@gmail.com"
     }
