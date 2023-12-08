@@ -39,7 +39,7 @@ def generate_template(year: str, day: str) -> None:
         else:
             print(f"Overwriting {file_path}")
 
-    template = resources.files("aoc.templates").joinpath("day_template.txt").read_text()
+    template = resources.files("aoc.templates").joinpath("python_day_template.txt").read_text()
     lines = template.split("\n")
 
     for i in range(len(lines)):

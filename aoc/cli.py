@@ -49,6 +49,10 @@ def main():
         print("The AoC year cannot be earlier than 2015!")
         sys.exit(1)
 
+    if not 0 < args.day < 26:
+        print("The AoC day must be between 1 and 25!")
+        sys.exit(1)
+
     if args.set_token:
         set_session_token(args.set_token)
 
