@@ -1,7 +1,7 @@
 # AOC
 My attempts at Advent of Code, along with a small helper library to streamline my daily AoC tasks.  
 
-## Installation
+# Installation
 I've mainly written this package just for myself, and so it follows my preferred directory structure and solution template for solving AoC problems. But you're welcome to use this package if you want to!
 
 Since the `aoc` name is already taken on PyPI, to use this library, you will have to install it from this source code in a virtual environment.
@@ -17,7 +17,7 @@ pip install -e .
 
 You can now use the helper functions in this library! You can find documentation for the API below.
 
-## Usage
+# Usage
 This library provides the following features -
 
 1. Generate a solution file for a particular AoC day using the Python template present in `aoc.templates`
@@ -31,7 +31,7 @@ To get a quick overview of the features offered by the CLI, run
 aoc -h
 ```
 
-### Generating A Solution File
+## Generating A Solution File
 To generate a solution file for a particular day, use the `-c` or `--create` flag.
 
 ```bash
@@ -56,7 +56,7 @@ All solution files are stored in a directory named after the year. The library l
 
 The solution files are named `day{day}.py`, for example, `day01.py` to `day25.py`.
 
-### Fetching Your Puzzle Input
+## Fetching Your Puzzle Input
 To fetch your input for a particular day, use the `-f` or `--fetch` flag.
 
 ```bash
@@ -80,7 +80,7 @@ This above command will fetch your puzzle input for day 12, 2022.
 Note: In order to fetch your puzzle input, you need to provide your session token for adventofcode.com  
 See [Getting Your Session Token](#getting-your-session-token)
 
-### Getting Your Session Token
+## Getting Your Session Token
 Follow these steps to get your session token -
 
 1. Log into [Advent of Code](https://adventofcode.com).

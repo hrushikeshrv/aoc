@@ -17,6 +17,8 @@ Specifically:
 ## Installing This Library
 I've mainly written this package just for myself, and so it follows my preferred directory structure and solution template for solving AoC problems. But you're welcome to use this package if you want to!
 
+You can find documentation for the API at [https://hrus.in/aoc/](https://hrus.in/aoc/)
+
 Since the `aoc` name is already taken on PyPI, to use this library, you will have to install it from this source code in a virtual environment.
 
 1. Get the source code by cloning this repository.
