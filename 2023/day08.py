@@ -51,5 +51,5 @@ def solve2(lines):
 
 
 if __name__ == "__main__":
-    # print(solve1(lines))
+    print(solve1(lines))
     print(solve2(lines))
