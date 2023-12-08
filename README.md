@@ -5,6 +5,8 @@ My attempts at Advent of Code, along with a small helper library to streamline m
 [Advent of Code 2022](https://adventofcode.com/2022)  
 [Advent of Code 2023](https://adventofcode.com/2023)
 
+You can find documentation for this library at [hrus.in/aoc/](https://hrus.in/aoc/)
+
 ## Compliance with AoC Guidelines
 The helper and utility functions included in this library follow the guidelines given by the [Advent of Code Wiki](https://www.reddit.com/r/adventofcode/wiki/faqs/automation).
 
@@ -17,7 +19,7 @@ Specifically:
 ## Installing This Library
 I've mainly written this package just for myself, and so it follows my preferred directory structure and solution template for solving AoC problems. But you're welcome to use this package if you want to!
 
-You can find documentation for the API at [https://hrus.in/aoc/](https://hrus.in/aoc/)
+You can find documentation for the API at [hrus.in/aoc/](https://hrus.in/aoc/)
 
 Since the `aoc` name is already taken on PyPI, to use this library, you will have to install it from this source code in a virtual environment.
 
