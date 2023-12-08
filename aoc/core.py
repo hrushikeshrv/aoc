@@ -39,7 +39,9 @@ def generate_template(year: str, day: str) -> None:
         else:
             print(f"Overwriting {file_path}")
 
-    template = resources.files("aoc.templates").joinpath("python_day_template.txt").read_text()
+    template = (
+        resources.files("aoc.templates").joinpath("python_day_template.txt").read_text()
+    )
     lines = template.split("\n")
 
     for i in range(len(lines)):
@@ -101,3 +103,20 @@ def fetch_input(year: str, day: str) -> None:
     with open(input_path, "w") as f:
         f.write(response.text)
     print(f"Input stored successfully in {input_path}")
+
+
+def submit_answer(year: int, day: int, part: int, solution: str) -> bool:
+    """
+    Submits a solution for the given day and year
+    :param year: The year
+    :param day: The day
+    :param part: The part
+    :param solution: The solution
+    :return: True if the solution is correct, False otherwise
+    """
+    # Parse aoc/data/solutions.json and check if this solution has been previously submitted for the current
+    # Session token
+
+    # If it has, return the same response as before
+
+    # Otherwise, add this solution to the dictionary of submitted solutions and the response it received
