@@ -62,6 +62,11 @@ def fetch_input(year: str, day: str) -> None:
     :return: None
     """
     dest = Path(f"./{year}/inputs")
+    if not dest.exists():
+        print(
+            f"Couldn't find directory named {year}/inputs in cwd, creating new directory named ./{year}/inputs"
+        )
+        dest.mkdir()
     input_url = f"https://adventofcode.com/{year}/day/{day}/input"
 
     if len(day) == 1:

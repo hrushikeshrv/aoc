@@ -1,14 +1,15 @@
 # AOC
-My attempts at Advent of Code, along with a small helper library to streamline my daily AoC tasks.  
+My attempts at Advent of Code, along with a small helper library to streamline daily AoC tasks.  
 [Advent of Code 2020](https://adventofcode.com/2020)  
 [Advent of Code 2021](https://adventofcode.com/2021)  
 [Advent of Code 2022](https://adventofcode.com/2022)  
-[Advent of Code 2023](https://adventofcode.com/2023)
+[Advent of Code 2023](https://adventofcode.com/2023)  
+[Advent of Code 2024](https://adventofcode.com/2024)
 
 You can find documentation for this library at [hrus.in/aoc/](https://hrus.in/aoc/)
 
 ## Compliance with AoC Guidelines
-The helper and utility functions included in this library follow the guidelines given by the [Advent of Code Wiki](https://www.reddit.com/r/adventofcode/wiki/faqs/automation).
+The helper and utility functions included in this library follow the automation guidelines given by the [Advent of Code Wiki](https://www.reddit.com/r/adventofcode/wiki/faqs/automation).
 
 Specifically:
 - No automated requests are made, only user initiated.
