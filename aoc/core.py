@@ -1,3 +1,5 @@
+from contextlib import chdir
+import os
 import importlib.resources as resources
 import requests
 
@@ -108,6 +110,25 @@ def fetch_input(year: str, day: str) -> None:
     with open(input_path, "w") as f:
         f.write(response.text)
     print(f"Input stored successfully in {input_path}")
+
+
+def run_solution(year: int, day: int) -> None:
+    """
+    Reads and execs the solution file for the given day and year.
+    :param year: The AoC year
+    :param day: The day
+    :return:
+    """
+    day = str(day)
+    if len(day) == 1:
+        day = "0" + day
+
+    src_dir = Path(f"./{year}/day{day}.py")
+    if not src_dir.exists():
+        print(f"Couldn't find the solution file ./{year}/day{day}.py")
+        return
+    with chdir(f"./{year}"):
+        os.system(f"python day{day}.py")
 
 
 def submit_answer(year: int, day: int, part: int, solution: str) -> bool:

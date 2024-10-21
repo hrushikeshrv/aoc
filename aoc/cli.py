@@ -3,7 +3,7 @@ import datetime
 
 import sys
 
-from aoc.core import generate_template, fetch_input
+from aoc.core import generate_template, fetch_input, run_solution
 from aoc.utils import set_session_token
 
 
@@ -40,6 +40,12 @@ def main():
         help="Fetch your input for a given year and day.",
     )
     parser.add_argument(
+        "-r",
+        "--run",
+        action="store_true",
+        help="Run the solution file for a given year and day.",
+    )
+    parser.add_argument(
         "--set-token", help="Set your session token for communicating with AoC servers."
     )
 
@@ -61,5 +67,8 @@ def main():
 
     if args.fetch:
         fetch_input(str(args.year), str(args.day))
+
+    if args.run:
+        run_solution(args.year, args.day)
 
     sys.exit(0)
