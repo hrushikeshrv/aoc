@@ -3,17 +3,13 @@ import importlib.resources as resources
 from pathlib import Path
 
 
-def confirm_overwrite(path: Path | str) -> bool:
+def get_confirmation(message: str) -> bool:
     """
-    Asks the user whether they want to overwrite a given path and returns their answer.
-    :param path: The path to overwrite
-    :return: True if the path should be overwritten, False otherwise.
+    Asks the user for confirmation before an action.
+    :param message: The confirmation message to show
+    :return: True if the user provides confirmation (enters "y" or similar), False otherwise
     """
-    overwrite = (
-        input(f"{path} already exists. Do you want to overwrite its contents (y/n)? - ")
-        .strip()[0]
-        .lower()
-    )
+    overwrite = input(message).strip()[0].lower()
     while overwrite not in ["y", "n"]:
         overwrite = (
             input(f'Enter "y" for yes and "n" for no. Got {overwrite} - ')

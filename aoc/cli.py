@@ -1,5 +1,6 @@
 import argparse
 import datetime
+import pytz
 
 import sys
 
@@ -12,20 +13,23 @@ def main():
         prog=__package__,
         description="A small helper package for streamlining Advent of Code tasks",
     )
+    now = datetime.datetime.now(pytz.utc)
+    est = pytz.timezone("US/Eastern")
+    now = now.astimezone(est)
 
     parser.add_argument(
         "year",
         type=int,
         help="The AoC year you want to work with.",
         nargs="?",
-        default=datetime.datetime.now().year,
+        default=now.year,
     )
     parser.add_argument(
         "day",
         type=int,
         nargs="?",
         help="The AoC day you want to work with.",
-        default=datetime.datetime.now().day,
+        default=now.day,
     )
     parser.add_argument(
         "-c",

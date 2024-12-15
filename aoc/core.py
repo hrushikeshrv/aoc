@@ -5,7 +5,7 @@ import requests
 
 
 from aoc.utils import (
-    confirm_overwrite,
+    get_confirmation,
     get_session_token,
     set_session_token,
     get_request_headers,
@@ -25,9 +25,10 @@ def generate_template(year: str, day: str) -> None:
     """
     year_dir = Path(f"./{year}")
     if not year_dir.exists():
-        print(
-            f"Couldn't find directory named {year} in cwd, creating new directory named ./{year}/"
-        )
+        print(f"Couldn't find directory named {year} in cwd ({os.getcwd()})")
+        create = get_confirmation("Create a new directory? (y/n) - ")
+        if not create:
+            return
         year_dir.mkdir()
 
     if len(day) == 1:
@@ -35,7 +36,9 @@ def generate_template(year: str, day: str) -> None:
 
     file_path = year_dir / f"day{day}.py"
     if file_path.exists():
-        overwrite = confirm_overwrite(file_path)
+        overwrite = get_confirmation(
+            message=f"{file_path} already exists. Do you want to overwrite its contents? (y/n) - "
+        )
         if not overwrite:
             return
         else:
@@ -65,9 +68,10 @@ def fetch_input(year: str, day: str) -> None:
     """
     dest = Path(f"./{year}/inputs")
     if not dest.exists():
-        print(
-            f"Couldn't find directory named {year}/inputs in cwd, creating new directory named ./{year}/inputs"
-        )
+        print(f"Couldn't find directory named {year}/inputs in cwd ({os.getcwd()})")
+        create = get_confirmation("Create a new directory? (y/n) - ")
+        if not create:
+            return
         dest.mkdir()
     input_url = f"https://adventofcode.com/{year}/day/{day}/input"
 
@@ -76,7 +80,9 @@ def fetch_input(year: str, day: str) -> None:
 
     input_path = dest / f"input-{day}.txt"
     if input_path.exists():
-        overwrite = confirm_overwrite(input_path)
+        overwrite = get_confirmation(
+            message=f"{input_path} already exists. Do you want to overwrite its contents? (y/n) - "
+        )
         if not overwrite:
             return
         else:
