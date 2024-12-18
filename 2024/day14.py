@@ -101,8 +101,6 @@ def solve2(lines):
             if subgrid > threshold:
                 save_grid(grid, i)
                 break
-        if i % 100 == 0:
-            print(f'Processed {i} steps')
 
 
 if __name__ == "__main__" or __name__ == "aoc.core":

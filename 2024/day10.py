@@ -1,18 +1,7 @@
+from aoc.helpers import get_neighbours
+
 with open('inputs/input-10.txt') as file:
     input_ = list(map(lambda x: x.strip(), file.readlines()))
-
-
-def get_neighbours(row, col, n_rows, n_cols):
-    n = []
-    if 0 < row:
-        n.append((row - 1, col))
-    if 0 < col:
-        n.append((row, col - 1))
-    if row < n_rows - 1:
-        n.append((row + 1, col))
-    if col < n_cols - 1:
-        n.append((row, col + 1))
-    return n
 
 
 def find_trail_peaks(lines, row, col, n_rows, n_cols, cache={}, visited=set()):
